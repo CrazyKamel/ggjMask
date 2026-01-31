@@ -12,4 +12,3 @@ func _process(delta):
 	var viewport_size = get_viewport_rect().size
 	var screen_uv = screen_pos / viewport_size
 	mat.set_shader_parameter("player_screen_pos", screen_uv)
-	print(screen_uv)
