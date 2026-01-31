@@ -10,10 +10,10 @@ size = Vector2(116, 120)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
 shader = ExtResource("3_h2yge")
-shader_parameter/circle_size = 0.3770000179075
 shader_parameter/screen_width = 1920.0
 shader_parameter/screen_height = 1080.0
 shader_parameter/player_screen_pos = Vector2(0, 0)
+shader_parameter/mask_strengh = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lquwl"]
 texture = ExtResource("4_1bvp3")
