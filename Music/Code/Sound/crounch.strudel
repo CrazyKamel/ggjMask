@@ -1,0 +1,5 @@
+setcpm(120/4)
+
+$:sound("cr ~".fast(1)).adsr("0:0:2:1").crush(3).lpf(7000)
+$:sound("rd ~".fast(1)).adsr("0:0:2:1").crush(4).lpf(7000)
+$:sound("bd ~".fast(1)).adsr("0:0:2:1").crush(2).lpf(5000)
