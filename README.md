@@ -83,7 +83,7 @@ jobs:
         run: zip -r game_web.zip build/web
 
       - name: Upload Web artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: game_web
           path: game_web.zip
@@ -113,7 +113,7 @@ jobs:
         run: zip -r game_linux.zip build/linux
 
       - name: Upload Linux artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: game_linux
           path: game_linux.zip
@@ -143,7 +143,7 @@ jobs:
         run: zip -r game_windows.zip build/windows
 
       - name: Upload windows artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: game_windows
           path: game_windows.zip
@@ -174,17 +174,17 @@ jobs:
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
 
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: game_web
 
       - name: Download Linux artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: game_linux
 
       - name: Download Windows artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: game_windows
 
@@ -290,7 +290,7 @@ jobs:
         run: zip -r game_web.zip build/web
 
       - name: Upload Web artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: game_web
           path: game_web.zip
@@ -321,7 +321,7 @@ jobs:
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
 
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: game_web
 
@@ -391,7 +391,7 @@ jobs:
         run: zip -r game_linux.zip build/linux
 
       - name: Upload Linux artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: game_linux
           path: game_linux.zip
@@ -421,7 +421,7 @@ jobs:
         run: zip -r game_windows.zip build/windows
 
       - name: Upload windows artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: game_windows
           path: game_windows.zip
@@ -452,12 +452,12 @@ jobs:
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
 
       - name: Download Linux artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: game_linux
 
       - name: Download Windows artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: game_windows
 
@@ -536,7 +536,7 @@ jobs:
         run: zip -r game_linux.zip build/linux
 
       - name: Upload Linux artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: game_linux
           path: game_linux.zip
@@ -567,7 +567,7 @@ jobs:
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
 
       - name: Download Linux artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: game_linux
 
@@ -635,7 +635,7 @@ jobs:
         run: zip -r game_windows.zip build/windows
 
       - name: Upload windows artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: game_windows
           path: game_windows.zip
@@ -666,7 +666,7 @@ jobs:
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
 
       - name: Download Windows artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: game_windows
 
