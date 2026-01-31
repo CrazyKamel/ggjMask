@@ -68,6 +68,7 @@ func _process(delta):
 	mat.set_shader_parameter("mask_strengh", mask_strengh)
 	if Input.is_action_just_pressed("DEBUG_TRAP"):
 		if mask_strengh > 1:
+			$"../ColorRect".set_visible(true)
 			mask_strengh = 1
 		mask_strengh=mask_strengh*0.5
 		if mask_strengh < 0.05:
