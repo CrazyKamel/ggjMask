@@ -2,9 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://bdvx58rwnaeev" path="res://icon.svg" id="1_xhw8e"]
 [ext_resource type="Script" uid="uid://c8prco6bje8h3" path="res://player_movement.gd" id="2_0xm2m"]
+[ext_resource type="Shader" uid="uid://rmema354vyde" path="res://main.gdshader" id="3_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(128.5, 131.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
+shader = ExtResource("3_h2yge")
+shader_parameter/circle_size = 0.3770000179075
+shader_parameter/screen_width = 1920.0
+shader_parameter/screen_height = 1080.0
+shader_parameter/player_screen_pos = Vector2(0, 0)
 
 [node name="Node2D" type="Node2D" unique_id=1851155468]
 
@@ -12,9 +20,12 @@ size = Vector2(128.5, 131.5)
 script = ExtResource("2_0xm2m")
 
 [node name="Icon" type="Sprite2D" parent="CharacterBody2D" unique_id=1442781679]
-position = Vector2(552, 307)
 texture = ExtResource("1_xhw8e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1325667794]
-position = Vector2(551.75, 307.25)
 shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=179986175]
+material = SubResource("ShaderMaterial_h2yge")
+offset_right = 1920.0
+offset_bottom = 1080.0
