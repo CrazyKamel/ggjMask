@@ -21,7 +21,9 @@ func _physics_process(delta):
 	print(tile_coords)
 	velocity = position.direction_to(target) * speed
 	if position.distance_to(target) > 10:
-		move_and_slide()
+		var collide = move_and_slide()
+		if (collide) :
+			velocity = Vector2(0,0)
 	else:
 		position = target
 		velocity = Vector2(0,0)
@@ -29,16 +31,16 @@ func _physics_process(delta):
 func _process(delta):
 	if velocity == Vector2(0,0):
 		if Input.is_action_just_pressed("Right"):
-			target.x = clamp(position.x + step_length, minX, maxX)
+			target.x = position.x + step_length
 			#position = target
 		elif Input.is_action_just_pressed("Left"):
-			target.x = clamp(position.x - step_length, minX, maxX)
+			target.x = position.x - step_length
 			#position = target
 		elif Input.is_action_just_pressed("Up"):
-			target.y = clamp(position.y - step_length, minY, maxY)
+			target.y = position.y - step_length
 			#position = target
 		elif Input.is_action_just_pressed("Down"):
-			target.y = clamp(position.y + step_length, minY, maxY)
+			target.y = position.y + step_length
 			#position = target
 			
 	var mat := colorRect.material as ShaderMaterial

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ocuwxhu3qo3p" path="res://assets/tilesheet_complete.png" id="4_1bvp3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
-size = Vector2(128.5, 131.5)
+size = Vector2(116, 120)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
 shader = ExtResource("3_h2yge")
@@ -20,6 +20,7 @@ texture = ExtResource("4_1bvp3")
 texture_region_size = Vector2i(64, 64)
 16:5/0 = 0
 9:8/0 = 0
+9:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
 [sub_resource type="TileSet" id="TileSet_h2yge"]
 tile_size = Vector2i(64, 64)
