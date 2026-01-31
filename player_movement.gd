@@ -11,6 +11,7 @@ extends CharacterBody2D
 @onready var colorRect = $"../ColorRect"
 
 var moves_buffer = []
+var moving = false
 
 var target = position
 
@@ -21,32 +22,43 @@ func _physics_process(delta):
 	var target_type = tileMap.get_cell_tile_data(target_tile)
 	
 	if !target_type.get_custom_data("mur"):
+		moving = true
 		if position.distance_to(target) > 10:
 			velocity = position.direction_to(target) * speed
 			var collide = move_and_slide()
 		else:
+			moving = false
 			position = target
 			velocity = Vector2(0,0)
 	else:
 		target = position
-				
+		moving = false
+
+func move(dir):
+	match dir:
+		"R":target.x = position.x + step_length
+		"L":target.x = position.x - step_length
+		"U":target.y = position.y - step_length
+		"D":target.y = position.y + step_length
 	
 func _process(delta):
 	
-	if velocity == Vector2(0,0):
+	if moves_buffer.size() > 0 and !moving:
+		move(moves_buffer.pop_front())
+	else:
 		if Input.is_action_just_pressed("Right"):
-			target.x = position.x + step_length
-			#position = target
+			if !moving: move("R")
+			else: moves_buffer.append("R")
 		elif Input.is_action_just_pressed("Left"):
-			target.x = position.x - step_length
-			#position = target
+			if !moving: move("L")
+			else: moves_buffer.append("L")
 		elif Input.is_action_just_pressed("Up"):
-			target.y = position.y - step_length
-			#position = target
+			if !moving: move("U")
+			else: moves_buffer.append("U")
 		elif Input.is_action_just_pressed("Down"):
-			target.y = position.y + step_length
-			#position = target
-			
+			if !moving: move("D")
+			else: moves_buffer.append("D")
+
 	var mat := colorRect.material as ShaderMaterial
 	
 	var screen_pos = self.global_position
