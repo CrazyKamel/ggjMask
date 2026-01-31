@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var step_length = 128
 @export var speed = 300
 
-@export var mask_strengh = 1.05
+@export var mask_strengh = 10
 
 @onready var tileMap = $"../TileMapLayer"
 
@@ -55,4 +55,8 @@ func _process(delta):
 	mat.set_shader_parameter("player_screen_pos", screen_uv)
 	mat.set_shader_parameter("mask_strengh", mask_strengh)
 	if Input.is_action_just_pressed("DEBUG_TRAP"):
-		mask_strengh-=0.05
+		if mask_strengh > 1:
+			mask_strengh = 1
+		mask_strengh=mask_strengh*0.5
+		if mask_strengh < 0.05:
+			mask_strengh = 0 
