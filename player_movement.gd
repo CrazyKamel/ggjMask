@@ -3,9 +3,12 @@ extends CharacterBody2D
 @export var step_length = 128
 @export var speed = 300
 
+@export var startX = 928
+@export var startY = 800
+
 @export var mask_strengh = 10
 
-@onready var tileMap = $"../TileMapLayer"
+@onready var tileMap = $"../TileMapLayer2"
 
 @onready var cam := get_viewport().get_camera_2d()
 @onready var colorRect = $"../ColorRect"
@@ -14,6 +17,9 @@ var moves_buffer = []
 var moving = false
 
 var target = position
+
+func _ready():
+	position = Vector2(startX, startY)
 
 func _physics_process(delta):
 	var tile_coords = tileMap.local_to_map(tileMap.to_local(global_position))
