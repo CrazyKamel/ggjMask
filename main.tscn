@@ -1,6 +1,5 @@
 [gd_scene format=4 uid="uid://brs6u78mwggbp"]
 
-[ext_resource type="Texture2D" uid="uid://bdvx58rwnaeev" path="res://icon.svg" id="1_xhw8e"]
 [ext_resource type="Texture2D" uid="uid://dwbgd4bga4xbc" path="res://tilesheet_complete.png" id="2_0xm2m"]
 
 [sub_resource type="GDScript" id="GDScript_h2yge"]
@@ -46,11 +45,6 @@ sources/0 = SubResource("TileSetAtlasSource_1bvp3")
 
 [node name="Node2D" type="Node2D" unique_id=1851155468]
 script = SubResource("GDScript_h2yge")
-
-[node name="Icon" type="Sprite2D" parent="." unique_id=1442781679]
-z_index = 1
-position = Vector2(1146, 715)
-texture = ExtResource("1_xhw8e")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=103569881]
 z_index = -1
