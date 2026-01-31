@@ -2,33 +2,37 @@ extends CharacterBody2D
 
 @export var step_length = 128
 @export var mask_strengh = 0
-@export var minX = 672
-@export var maxX = 1248
-@export var minY = 224
-@export var maxY = 800
 
 @onready var tileMap = $"../TileMapLayer"
 
 @onready var cam := get_viewport().get_camera_2d()
 @onready var colorRect = $"../ColorRect"
 
-@export var speed = 250
+@export var speed = 300
+
+var moves_buffer = []
 
 var target = position
 
 func _physics_process(delta):
 	var tile_coords = tileMap.local_to_map(tileMap.to_local(global_position))
-	print(tile_coords)
-	velocity = position.direction_to(target) * speed
-	if position.distance_to(target) > 10:
-		var collide = move_and_slide()
-		if (collide) :
+	
+	var target_tile = tileMap.local_to_map(tileMap.to_local(target))
+	var target_type = tileMap.get_cell_tile_data(target_tile)
+	
+	if !target_type.get_custom_data("mur"):
+		if position.distance_to(target) > 10:
+			velocity = position.direction_to(target) * speed
+			var collide = move_and_slide()
+		else:
+			position = target
 			velocity = Vector2(0,0)
 	else:
-		position = target
-		velocity = Vector2(0,0)
+		target = position
+				
 	
 func _process(delta):
+	
 	if velocity == Vector2(0,0):
 		if Input.is_action_just_pressed("Right"):
 			target.x = position.x + step_length
