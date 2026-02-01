@@ -3,9 +3,12 @@ extends CharacterBody2D
 @export var step_length = 128
 @export var speed = 300
 
+@export var startX = 928
+@export var startY = 800
+
 @export var mask_strengh = 10
 
-@onready var tileMap = $"../TileMapLayer"
+@onready var tileMap = $"../TileMapLayer2"
 
 @onready var crounch = $"../Crounch"
 
@@ -18,10 +21,9 @@ var moving = false
 var target = position
 
 var crounch_state = false
-
-func _ready() :
-	crounch.start(4)
-
+func _ready():
+	position = Vector2(startX, startY)
+  crounch.start(4)
 
 func _physics_process(delta):
 	var tile_coords = tileMap.local_to_map(tileMap.to_local(global_position))
@@ -96,6 +98,7 @@ func _process(delta):
 	mat.set_shader_parameter("mask_strengh", mask_strengh)
 	if Input.is_action_just_pressed("DEBUG_TRAP"):
 		if mask_strengh > 1:
+			$"../ColorRect".set_visible(true)
 			mask_strengh = 1
 		mask_strengh=mask_strengh*0.5
 		if mask_strengh < 0.05:
