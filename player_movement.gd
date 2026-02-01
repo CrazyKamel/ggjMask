@@ -42,23 +42,23 @@ func _physics_process(delta):
 			moving = false
 			position = target
 			velocity = Vector2(0,0)
-			match direction:
+      match direction:
 				'R':$AnimatedSprite2D.play("idle_right")
 				'L':$AnimatedSprite2D.play("idle_left")
 				'D':$AnimatedSprite2D.play("idle_front")
 				'U':$AnimatedSprite2D.play("idle_back")
 		if target_type.get_custom_data("pikpikpik"):
+			back_to_spawn()
 			print("ça pikpikpik 1 peu kan même")
-			# relancer la partie à l'état initial
 		elif target_type.get_custom_data("crounch"):
 			if crounch_state:
+				back_to_spawn()
 				print("retard sur la ligne A à cause d'un incident voyageur")
-				# relancer la partie à l'état initial
 		elif target_type.get_custom_data("teleport"):
+			teleport(750, 450)
 			print("wtf jsuis un photon")
 		elif target_type.get_custom_data("exit"):
 			print("tié un kouign amann")
-			#passer au niveau suivant
 		
 	else:
 		target = position
@@ -89,7 +89,23 @@ func move(dir):
 			target.y = position.y + step_length
 			direction = 'D'
 			$AnimatedSprite2D.play("walk_front")
-	
+		
+func trapped():
+	if mask_strengh > 1:
+		$"../ColorRect".set_visible(true)
+		mask_strengh = 1
+	mask_strengh=mask_strengh*0.5
+	if mask_strengh < 0.05:
+		mask_strengh = 0 
+
+func back_to_spawn():
+	teleport(startX, startY)
+	trapped()
+
+func teleport(x,y):
+	position = Vector2(x, y)
+	target = position
+
 func _process(delta):
 	
 	if moves_buffer.size() > 0 and !moving:
@@ -115,16 +131,6 @@ func _process(delta):
 	var screen_uv = screen_pos / viewport_size
 	mat.set_shader_parameter("player_screen_pos", screen_uv)
 	mat.set_shader_parameter("mask_strengh", mask_strengh)
-	if Input.is_action_just_pressed("DEBUG_TRAP"):
-		if mask_strengh > 1:
-			$"../ColorRect".set_visible(true)
-			mask_strengh = 1
-		mask_strengh=mask_strengh*0.5
-		if mask_strengh < 0.05:
-			mask_strengh = 0 
-	if Input.is_action_just_pressed("ui_cancel"):
-		Global.goto_scene("res://menu.tscn")
-
 
 func _on_crounch_timeout() -> void:
 	print(crounch_state)
