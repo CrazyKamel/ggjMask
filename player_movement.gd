@@ -19,12 +19,13 @@ var moves_buffer = []
 var moving = false
  
 var target = position
+var direction = 'F'
 
 var crounch_state = false
-
 func _ready():
 	position = Vector2(startX, startY)
 	crounch.start(4)
+	$"../AudioStreamPlayer".play()
 
 func _physics_process(delta):
 	var tile_coords = tileMap.local_to_map(tileMap.to_local(global_position))
@@ -41,21 +42,23 @@ func _physics_process(delta):
 			moving = false
 			position = target
 			velocity = Vector2(0,0)
+      match direction:
+				'R':$AnimatedSprite2D.play("idle_right")
+				'L':$AnimatedSprite2D.play("idle_left")
+				'D':$AnimatedSprite2D.play("idle_front")
+				'U':$AnimatedSprite2D.play("idle_back")
 		if target_type.get_custom_data("pikpikpik"):
 			back_to_spawn()
 			print("ça pikpikpik 1 peu kan même")
-			# relancer la partie à l'état initial
 		elif target_type.get_custom_data("crounch"):
 			if crounch_state:
 				back_to_spawn()
 				print("retard sur la ligne A à cause d'un incident voyageur")
-				# relancer la partie à l'état initial
 		elif target_type.get_custom_data("teleport"):
 			teleport(750, 450)
 			print("wtf jsuis un photon")
 		elif target_type.get_custom_data("exit"):
 			print("tié un kouign amann")
-			#passer au niveau suivant
 		
 	else:
 		target = position
@@ -70,10 +73,22 @@ func incidentVoyageur():
 		
 func move(dir):
 	match dir:
-		"R":target.x = position.x + step_length
-		"L":target.x = position.x - step_length
-		"U":target.y = position.y - step_length
-		"D":target.y = position.y + step_length
+		"R":
+			target.x = position.x + step_length
+			direction = 'R'
+			$AnimatedSprite2D.play("walk_right")
+		"L":
+			target.x = position.x - step_length
+			direction = 'L'
+			$AnimatedSprite2D.play("walk_left")
+		"U":
+			target.y = position.y - step_length
+			direction = 'U'
+			$AnimatedSprite2D.play("walk_back")
+		"D":
+			target.y = position.y + step_length
+			direction = 'D'
+			$AnimatedSprite2D.play("walk_front")
 		
 func trapped():
 	if mask_strengh > 1:
@@ -116,7 +131,6 @@ func _process(delta):
 	var screen_uv = screen_pos / viewport_size
 	mat.set_shader_parameter("player_screen_pos", screen_uv)
 	mat.set_shader_parameter("mask_strengh", mask_strengh)
-
 
 func _on_crounch_timeout() -> void:
 	print(crounch_state)
