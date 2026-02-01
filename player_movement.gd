@@ -121,6 +121,8 @@ func _process(delta):
 		mask_strengh=mask_strengh*0.5
 		if mask_strengh < 0.05:
 			mask_strengh = 0 
+	if Input.is_action_just_pressed("ui_cancel"):
+		Global.goto_scene("res://menu.tscn")
 
 
 func _on_crounch_timeout() -> void:
