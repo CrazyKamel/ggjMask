@@ -1,6 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
-*.uid
 .vscode/
 
-Music/Code/test/
+Music/Code/test/*
+
+*.uid
