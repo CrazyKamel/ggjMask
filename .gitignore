@@ -2,4 +2,6 @@
 .godot/
 .vscode/
 
-Music/Code/test/
+Music/Code/test/*
+
+*.uid

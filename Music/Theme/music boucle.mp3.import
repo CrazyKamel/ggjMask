@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c8qhmyjdqyjc2"
+path="res://.godot/imported/music boucle.mp3-68621c01050e98d19fc0988ad2847678.mp3str"
+
+[deps]
+
+source_file="res://Music/Theme/music boucle.mp3"
+dest_files=["res://.godot/imported/music boucle.mp3-68621c01050e98d19fc0988ad2847678.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
