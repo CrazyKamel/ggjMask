@@ -8,19 +8,23 @@ extends CharacterBody2D
 
 @export var mask_strengh = 10
 
-@onready var tileMap = $"../TileMapLayer2"
+@onready var tileMap = $"../TileMapLayer"
+
+@onready var crounch = $"../Crounch"
 
 @onready var cam := get_viewport().get_camera_2d()
 @onready var colorRect = $"../ColorRect"
 
 var moves_buffer = []
 var moving = false
-
+ 
 var target = position
 var direction = 'F'
 
+var crounch_state = false
 func _ready():
 	position = Vector2(startX, startY)
+	crounch.start(4)
 
 func _physics_process(delta):
 	var tile_coords = tileMap.local_to_map(tileMap.to_local(global_position))
@@ -42,10 +46,30 @@ func _physics_process(delta):
 				'L':$AnimatedSprite2D.play("idle_left")
 				'D':$AnimatedSprite2D.play("idle_front")
 				'U':$AnimatedSprite2D.play("idle_back")
+		if target_type.get_custom_data("pikpikpik"):
+			print("ça pikpikpik 1 peu kan même")
+			# relancer la partie à l'état initial
+		elif target_type.get_custom_data("crounch"):
+			if crounch_state:
+				print("retard sur la ligne A à cause d'un incident voyageur")
+				# relancer la partie à l'état initial
+		elif target_type.get_custom_data("teleport"):
+			print("wtf jsuis un photon")
+		elif target_type.get_custom_data("exit"):
+			print("tié un kouign amann")
+			#passer au niveau suivant
+		
 	else:
 		target = position
 		moving = false
 
+func incidentVoyageur():
+	crounch_state = !crounch_state
+	if !crounch_state :
+		crounch.start(4)
+	else :
+		crounch.start(2)
+		
 func move(dir):
 	match dir:
 		"R":
@@ -97,3 +121,9 @@ func _process(delta):
 		mask_strengh=mask_strengh*0.5
 		if mask_strengh < 0.05:
 			mask_strengh = 0 
+
+
+func _on_crounch_timeout() -> void:
+	print(crounch_state)
+	incidentVoyageur()
+	
