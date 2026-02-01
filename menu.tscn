@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bmhc0txc6t0tu"]
+
+[ext_resource type="Script" uid="uid://bmhvgppywu3jc" path="res://menu.gd" id="1_lti8b"]
+[ext_resource type="Texture2D" uid="uid://bm583jgxe22ja" path="res://assets/fond_menu.png" id="2_ouk20"]
+
+[node name="Menu" type="Node2D" unique_id=652178666]
+script = ExtResource("1_lti8b")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1578869467]
+offset_right = 1920.0
+offset_bottom = 1082.0
+texture = ExtResource("2_ouk20")
+
+[node name="Button" type="Button" parent="." unique_id=1224563035]
+offset_left = 500.0
+offset_top = 408.0
+offset_right = 930.0
+offset_bottom = 610.0
+theme_override_font_sizes/font_size = 80
+text = "Play"
+
+[node name="Button2" type="Button" parent="." unique_id=416149915]
+offset_left = 981.0
+offset_top = 408.0
+offset_right = 1411.0
+offset_bottom = 610.0
+theme_override_font_sizes/font_size = 80
+text = "Quit"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
