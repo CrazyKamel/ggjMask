@@ -17,6 +17,7 @@ var moves_buffer = []
 var moving = false
 
 var target = position
+var direction = 'F'
 
 func _ready():
 	position = Vector2(startX, startY)
@@ -36,16 +37,33 @@ func _physics_process(delta):
 			moving = false
 			position = target
 			velocity = Vector2(0,0)
+			match direction:
+				'R':$AnimatedSprite2D.play("idle_right")
+				'L':$AnimatedSprite2D.play("idle_left")
+				'D':$AnimatedSprite2D.play("idle_front")
+				'U':$AnimatedSprite2D.play("idle_back")
 	else:
 		target = position
 		moving = false
 
 func move(dir):
 	match dir:
-		"R":target.x = position.x + step_length
-		"L":target.x = position.x - step_length
-		"U":target.y = position.y - step_length
-		"D":target.y = position.y + step_length
+		"R":
+			target.x = position.x + step_length
+			direction = 'R'
+			$AnimatedSprite2D.play("walk_right")
+		"L":
+			target.x = position.x - step_length
+			direction = 'L'
+			$AnimatedSprite2D.play("walk_left")
+		"U":
+			target.y = position.y - step_length
+			direction = 'U'
+			$AnimatedSprite2D.play("walk_back")
+		"D":
+			target.y = position.y + step_length
+			direction = 'D'
+			$AnimatedSprite2D.play("walk_front")
 	
 func _process(delta):
 	
