@@ -25,6 +25,7 @@ var crounch_state = false
 func _ready():
 	position = Vector2(startX, startY)
 	crounch.start(4)
+	$"../AudioStreamPlayer".play()
 
 func _physics_process(delta):
 	var tile_coords = tileMap.local_to_map(tileMap.to_local(global_position))
