@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 @export var mask_strengh = 10
 
-@onready var tileMap = $"../TileMapLayer2"
+@onready var tileMap = $"../TileMapLayer"
 
 @onready var crounch = $"../Crounch"
 
@@ -23,7 +23,7 @@ var target = position
 var crounch_state = false
 func _ready():
 	position = Vector2(startX, startY)
-  crounch.start(4)
+	crounch.start(4)
 
 func _physics_process(delta):
 	var tile_coords = tileMap.local_to_map(tileMap.to_local(global_position))
